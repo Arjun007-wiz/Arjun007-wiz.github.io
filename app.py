@@ -7,6 +7,11 @@ app = Flask(__name__)
 # Configure Ollama settings
 OLLAMA_MODEL = "llama2"  # You can change this to other models like "mistral", "codellama", etc.
 
+# System prompt for concise responses
+SYSTEM_PROMPT = """You are a helpful AI assistant. Keep your responses very brief and concise.
+Answer in 2-3 lines maximum. Be direct and to the point. Avoid lengthy explanations and examples.
+Focus on the core answer the user is looking for."""
+
 @app.route('/')
 def home():
     """Render the main chat interface"""
@@ -25,8 +30,14 @@ def chat():
         # Get conversation history if provided
         conversation_history = data.get('history', [])
         
+        # Add system prompt if this is the start of conversation
+        if not conversation_history:
+            messages = [{'role': 'system', 'content': SYSTEM_PROMPT}]
+        else:
+            messages = []
+        
         # Prepare messages for Ollama
-        messages = conversation_history + [{'role': 'user', 'content': user_message}]
+        messages = messages + conversation_history + [{'role': 'user', 'content': user_message}]
         
         # Get response from Ollama
         response = ollama.chat(
@@ -58,7 +69,14 @@ def chat_stream():
             return jsonify({'error': 'No message provided'}), 400
         
         conversation_history = data.get('history', [])
-        messages = conversation_history + [{'role': 'user', 'content': user_message}]
+        
+        # Add system prompt if this is the start of conversation
+        if not conversation_history:
+            messages = [{'role': 'system', 'content': SYSTEM_PROMPT}]
+        else:
+            messages = []
+        
+        messages = messages + conversation_history + [{'role': 'user', 'content': user_message}]
         
         def generate():
             """Generator function for streaming responses"""

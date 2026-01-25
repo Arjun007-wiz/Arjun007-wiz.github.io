@@ -209,7 +209,7 @@ function addMessage(text, sender) {
     
     const avatar = document.createElement('div');
     avatar.className = `message-avatar ${sender}-avatar`;
-    avatar.textContent = sender === 'bot' ? '🤖' : '👤';
+    avatar.textContent = sender === 'bot' ? '🐵' : '👤';
     
     const content = document.createElement('div');
     content.className = 'message-content';
