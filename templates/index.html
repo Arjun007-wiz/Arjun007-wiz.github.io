@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arjun's Chatbot - Ollama</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Walking Ducks Background -->
+    <div class="ducks-container">
+        <div class="duck" style="animation-delay: 0s; top: 15%;">🦆</div>
+        <div class="duck" style="animation-delay: 3s; top: 35%;">🦆</div>
+        <div class="duck" style="animation-delay: 6s; top: 55%;">🦆</div>
+        <div class="duck" style="animation-delay: 9s; top: 75%;">🦆</div>
+        <div class="duck" style="animation-delay: 12s; top: 25%;">🦆</div>
+    </div>
+    
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>🤖 Arjun's Chatbot</h1>
+            <div class="header-info">
+                <span id="status-indicator" class="status-indicator">●</span>
+                <span id="status-text">Connecting...</span>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-avatar bot-avatar">🤖</div>
+                <div class="message-content">
+                    <p>Hello! I'm Arjun's Chatbot powered by Ollama. How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    id="userInput" 
+                    class="chat-input" 
+                    placeholder="Type your message here..."
+                    rows="1"
+                ></textarea>
+                <button id="sendButton" class="send-button" title="Send message">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="input-options">
+                <label class="stream-toggle">
+                    <input type="checkbox" id="streamToggle" checked>
+                    <span>Stream responses</span>
+                </label>
+                <button id="clearButton" class="clear-button">Clear Chat</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
