@@ -1,53 +1,34 @@
-// DOM Elements
-const chatMessages = document.getElementById('chatMessages');
-const userInput = document.getElementById('userInput');
-const sendButton = document.getElementById('sendButton');
-const clearButton = document.getElementById('clearButton');
-const streamToggle = document.getElementById('streamToggle');
-const statusIndicator = document.getElementById('status-indicator');
-const statusText = document.getElementById('status-text');
-
-// Conversation history
-let conversationHistory = [];
-
-// Initialize
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    checkHealth();
-    setupEventListeners();
-    adjustTextareaHeight();
+    setupNavigation();
+    setupSmoothScroll();
 });
 
-// Event Listeners
-function setupEventListeners() {
-    sendButton.addEventListener('click', sendMessage);
+// Navigation setup
+function setupNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
     
-    userInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            sendMessage();
-        }
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update active nav link
+                navLinks.forEach(l => l.style.color = 'var(--text-secondary)');
+                link.style.color = 'var(--primary-color)';
+            }
+        });
     });
-    
-    userInput.addEventListener('input', adjustTextareaHeight);
-    
-    clearButton.addEventListener('click', clearChat);
 }
 
-// Check Ollama health status
-async function checkHealth() {
-    try {
-        const response = await fetch('/api/health');
-        const data = await response.json();
-        
-        if (data.ollama_running) {
-            updateStatus('online', 'Connected');
-        } else {
-            updateStatus('offline', 'Disconnected');
-        }
-    } catch (error) {
-        updateStatus('offline', 'Error');
-        console.error('Health check failed:', error);
-    }
+// Smooth scroll behavior
+function setupSmoothScroll() {
+    document.documentElement.style.scrollBehavior = 'smooth';
+}
 }
 
 // Update connection status

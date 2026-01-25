@@ -3,64 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arjun's Chatbot - Ollama</title>
+    <title>Arjun - Data Engineer & Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <!-- Walking Ducks Background -->
-    <div class="ducks-container">
-        <div class="duck" style="animation-delay: 0s; top: 15%;">🦆</div>
-        <div class="duck" style="animation-delay: 3s; top: 35%;">🦆</div>
-        <div class="duck" style="animation-delay: 6s; top: 55%;">🦆</div>
-        <div class="duck" style="animation-delay: 9s; top: 75%;">🦆</div>
-        <div class="duck" style="animation-delay: 12s; top: 25%;">🦆</div>
-    </div>
-    
-    <div class="chat-container">
-        <div class="chat-header">
-            <h1>🐵 Arjun's Chatbot</h1>
-            <div class="header-info">
-                <span id="status-indicator" class="status-indicator">●</span>
-                <span id="status-text">Connecting...</span>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">Arjun</a>
             </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
         </div>
-        
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot-message">
-                <div class="message-avatar bot-avatar">🐵</div>
-                <div class="message-content">
-                    <p>Hello! I'm Arjun's Chatbot powered by Ollama. How can I help you today?</p>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Hi, I'm Arjun</h1>
+                <p class="hero-subtitle">Aspiring Data Engineer</p>
+                <p class="hero-description">Exploring data projects, automating workflows, and learning new tech every day</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
                 </div>
             </div>
         </div>
-        
-        <div class="chat-input-container">
-            <div class="input-wrapper">
-                <textarea 
-                    id="userInput" 
-                    class="chat-input" 
-                    placeholder="Type your message here..."
-                    rows="1"
-                ></textarea>
-                <button id="sendButton" class="send-button" title="Send message">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="input-options">
-                <label class="stream-toggle">
-                    <input type="checkbox" id="streamToggle" checked>
-                    <span>Stream responses</span>
-                </label>
-                <button id="clearButton" class="clear-button">Clear Chat</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a student and aspiring data engineer with a passion for exploring data projects, automating workflows, and learning new technologies every day. I love solving problems through code and building things that make a difference.</p>
+                    <h3>⚽ Hobbies & Interests</h3>
+                    <p>I enjoy playing soccer and badminton, coding, and electronics. I aspire to become a data engineer or a professional soccer player!</p>
+                    <h3>Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-tag">Python</div>
+                        <div class="skill-tag">SQL</div>
+                        <div class="skill-tag">Data Analysis</div>
+                        <div class="skill-tag">Automation</div>
+                        <div class="skill-tag">Pygame</div>
+                        <div class="skill-tag">JavaScript</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>📈 Stock Market Analyzer</h3>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">SQL</span>
+                            <span class="tag">Data</span>
+                        </div>
+                    </div>
+                    <p class="project-description">Automates daily stock analysis to find the top 10 best and worst performing stocks using Python and SQL.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li>Daily automated analysis</li>
+                            <li>Stock performance tracking</li>
+                            <li>Database integration</li>
+                            <li>Top 10 best/worst finder</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Arjun-007.wiz" class="project-link" target="_blank">View Code <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🧩 Puzzle Game in Pygame</h3>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Pygame</span>
+                            <span class="tag">Game Dev</span>
+                        </div>
+                    </div>
+                    <p class="project-description">A 2D drag-and-drop block puzzle game with progressive levels and challenges, built using Pygame.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li>Drag-and-drop mechanics</li>
+                            <li>Progressive difficulty levels</li>
+                            <li>Interactive gameplay</li>
+                            <li>Smooth animations</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Arjun-007.wiz" class="project-link" target="_blank">View Code <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>⚡ Mini Projects</h3>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">Learning</span>
+                        </div>
+                    </div>
+                    <p class="project-description">A collection of various projects including automation scripts, data visualization experiments, and small game prototypes exploring different technologies.</p>
+                    <div class="project-features">
+                        <ul>
+                            <li>Automation scripts</li>
+                            <li>Data visualization</li>
+                            <li>Game prototypes</li>
+                            <li>Experimentation & learning</li>
+                        </ul>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Arjun-007.wiz" class="project-link" target="_blank">View Code <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="section-subtitle">Feel free to reach out for collaborations or just a friendly hello</p>
+            
+            <div class="contact-content">
+                <div class="contact-methods">
+                    <a href="mailto:electrocubers@gmail.com" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>electrocubers@gmail.com</p>
+                    </a>
+                    
+                    <a href="https://github.com/Arjun-007.wiz" class="contact-card" target="_blank">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p>View my projects</p>
+                    </a>
+                    
+                    <a href="mailto:electrocubers@gmail.com" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3>Get in Touch</h3>
+                        <p>Let's collaborate!</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Arjun. Thanks for visiting my GitHub!</p>
+        </div>
+    </footer>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
