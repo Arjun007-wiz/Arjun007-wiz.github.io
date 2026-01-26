@@ -4,17 +4,210 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Home — Arjun007-wiz</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/styles.css?v=2" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    body { background: #0f0f0f !important; color: #ff2d2d !important; font-family: 'Poppins', sans-serif !important; }
-    h1, h2, h3 { color: #ff2d2d !important; font-family: 'Poppins', sans-serif !important; }
-    .site-header { background: #1a1a1a !important; }
-    .site-header { border-bottom: 1px solid #333 !important; }
-    .nav-link { color: #ff2d2d !important; }
-    .cta { background: #ff2d2d !important; color: #fff !important; }
-    .features article { background: #1a1a1a !important; border: 1px solid #333 !important; }
-    p { color: #ddd !important; font-family: 'Poppins', sans-serif !important; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    
+    body {
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+      color: #ff2d2d;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .site-header {
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #ff2d2d;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideInLeft 0.8s ease;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .site-title {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff2d2d, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInDown 0.6s ease;
+    }
+    
+    .main-nav {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+    
+    .nav-link {
+      color: #ff2d2d;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-link:hover {
+      background: rgba(255, 45, 45, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 45, 45, 0.2);
+    }
+    
+    main { padding: 60px 0; animation: fadeInUp 0.8s ease 0.2s both; }
+    
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    
+    .hero h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #ff2d2d;
+      text-shadow: 0 0 20px rgba(255, 45, 45, 0.3);
+    }
+    
+    .hero p {
+      font-size: 18px;
+      color: #ddd;
+      margin-bottom: 15px;
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+    
+    strong { color: #ff6b6b; }
+    
+    .cta {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff2d2d, #ff6b6b);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid #ff2d2d;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+      animation: fadeInUp 0.8s ease 0.5s both;
+    }
+    
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    
+    .cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(255, 45, 45, 0.4);
+      left: 0;
+    }
+    
+    .cta:hover::before { left: 100%; }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+    
+    .features article {
+      background: rgba(26, 26, 26, 0.8);
+      border: 2px solid rgba(255, 45, 45, 0.2);
+      padding: 30px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease;
+    }
+    
+    .features article:nth-child(1) { animation-delay: 0.6s; }
+    .features article:nth-child(2) { animation-delay: 0.7s; }
+    .features article:nth-child(3) { animation-delay: 0.8s; }
+    
+    .features article:hover {
+      transform: translateY(-8px);
+      border-color: #ff2d2d;
+      box-shadow: 0 12px 32px rgba(255, 45, 45, 0.2);
+      background: rgba(26, 26, 26, 0.95);
+    }
+    
+    .features article h3 {
+      color: #ff2d2d;
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+    
+    .features article p, .features article ul {
+      color: #ddd;
+      font-size: 14px;
+    }
+    
+    .features article ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+    
+    .features article li {
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .features article li:before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #ff2d2d;
+    }
+    
+    .site-footer {
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 60px;
+      border-top: 1px solid rgba(255, 45, 45, 0.2);
+      color: #999;
+      font-size: 14px;
+      animation: fadeInUp 1s ease 0.9s both;
+    }
+    
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 36px; }
+      .main-nav { gap: 15px; }
+      .nav-link { padding: 6px 12px; font-size: 14px; }
+    }
   </style>
 </head>
 <body>
@@ -31,34 +224,35 @@
   <main class="container">
     <section class="hero">
       <h2>👋 Hi, I'm Arjun</h2>
-      <p>I'm a student and an aspiring <strong>data engineer</strong>.<br>I love exploring <strong>data projects</strong>, automating workflows, and learning new tech every day.</p>
-      <p><a class="cta" href="about.html">Learn more about me</a></p>
+      <p>I'm a student and an aspiring <strong>data engineer</strong></p>
+      <p>I love exploring <strong>data projects</strong>, automating workflows, and learning new tech every day.</p>
+      <a class="cta" href="about.html">Learn More About Me</a>
     </section>
 
     <section class="features">
       <article>
         <h3>⚽ Hobbies</h3>
-        <p>I enjoy playing soccer and badminton. I have a passion for coding and electronics. I also aspire to be a data engineer or a soccer player.</p>
+        <p>I enjoy playing soccer and badminton. I have a passion for coding and electronics. I also aspire to be a data engineer or a professional soccer player.</p>
       </article>
       <article>
         <h3>💻 My Projects</h3>
         <ul>
-          <li><strong>📈 Stock Market Analyzer</strong> - Automates daily stock analysis to find the top 10 best and worst performing stocks using Python + SQL.</li>
-          <li><strong>🧩 Puzzle Game in Pygame</strong> - A 2D drag-and-drop block puzzle game with progressive levels and challenges.</li>
-          <li><strong>⚡ Mini Projects</strong> - Automation scripts, data visualization, and game prototypes.</li>
+          <li><strong>📈 Stock Market Analyzer</strong> - Automates daily stock analysis</li>
+          <li><strong>🧩 Puzzle Game in Pygame</strong> - 2D drag-and-drop block puzzle</li>
+          <li><strong>⚡ Mini Projects</strong> - Automation and visualization</li>
         </ul>
       </article>
       <article>
-        <h3>📫 Contact Me</h3>
-        <p><strong>GitHub:</strong> <a href="https://github.com/Arjun007-wiz" target="_blank">github.com/Arjun007-wiz</a><br>
-        <strong>Email:</strong> electrocubers@gmail.com</p>
+        <h3>📫 Contact</h3>
+        <p><strong>GitHub:</strong> <a href="https://github.com/Arjun007-wiz" target="_blank" style="color: #ff2d2d;">github.com/Arjun007-wiz</a></p>
+        <p style="margin-top: 10px;"><strong>Email:</strong> electrocubers@gmail.com</p>
       </article>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <small>Built from <code>design.md</code> — edit the repository files to personalize content.</small>
+      <small>Crafted with passion | © 2026 Arjun007-wiz</small>
     </div>
   </footer>
 </body>
