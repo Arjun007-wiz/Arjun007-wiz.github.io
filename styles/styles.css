@@ -1,23 +1,24 @@
 :root{
-  --bg:#f7f7fb;
-  --surface:#ffffff;
-  --accent:#0b6efd;
-  --muted:#666;
+  --bg:#0f0f0f;
+  --surface:#1a1a1a;
+  --accent:#ff2d2d;
+  --muted:#aaa;
   --max-width:1000px;
 }
 *{box-sizing:border-box}
-body{font-family:Segoe UI, Roboto, Arial, sans-serif; margin:0; background:var(--bg); color:#111}
+body{font-family:'Segoe UI', 'Helvetica Neue', Arial, sans-serif; margin:0; background:var(--bg); color:#ff2d2d}
 .container{max-width:var(--max-width); margin:0 auto; padding:24px}
-.site-header{background:var(--surface); border-bottom:1px solid #e7e7ee}
+.site-header{background:var(--surface); border-bottom:1px solid #333}
 .site-header .container{display:flex; align-items:center; gap:16px}
-.site-title{margin:12px 0; font-size:1.25rem}
+.site-title{margin:12px 0; font-size:1.25rem; color:#ff2d2d}
 .main-nav{margin-left:auto}
 .nav-link{margin-left:12px; color:var(--accent); text-decoration:none}
 .hero{padding:36px 0}
-.hero h2{margin-top:0}
+.hero h2{margin-top:0; color:#ff2d2d}
 .cta{display:inline-block; background:var(--accent); color:#fff; padding:10px 14px; border-radius:6px; text-decoration:none}
 .features{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-top:24px}
-.features article{background:var(--surface); padding:16px; border-radius:8px; box-shadow:0 1px 0 rgba(0,0,0,0.03)}
+.features article{background:var(--surface); padding:16px; border-radius:8px; box-shadow:0 1px 0 rgba(255,45,45,0.1); border:1px solid #333}
+.features article h3{color:#ff2d2d}
 .site-footer{margin-top:36px; padding:12px 0; text-align:center; color:var(--muted)}
 .about-content{background:var(--surface); padding:18px; border-radius:8px}
 .quiz-area{background:var(--surface); padding:18px; border-radius:8px}
