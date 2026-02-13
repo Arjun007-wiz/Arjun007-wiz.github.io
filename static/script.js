@@ -1,33 +1,63 @@
 // Initialize on page load
+
 document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
     setupSmoothScroll();
+    setupButtonRipple();
 });
 
 // Navigation setup
+
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
-    
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-                
-                // Update active nav link
-                navLinks.forEach(l => l.style.color = 'var(--text-secondary)');
-                link.style.color = 'var(--primary-color)';
+            // Only animate for hash links
+            if (link.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    // Animate scroll
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    // Animate nav link (ripple effect)
+                    createRipple(link, e);
+                }
             }
         });
     });
 }
 
 // Smooth scroll behavior
+
 function setupSmoothScroll() {
     document.documentElement.style.scrollBehavior = 'smooth';
+}
+
+// Button ripple animation
+function setupButtonRipple() {
+    const buttons = document.querySelectorAll('.btn, .nav-link');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            createRipple(this, e);
+        });
+    });
+}
+
+function createRipple(element, event) {
+    // Remove any old ripple
+    const oldRipple = element.querySelector('.ripple');
+    if (oldRipple) oldRipple.remove();
+    // Create new ripple
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (event.clientX - rect.left - size / 2) + 'px';
+    ripple.style.top = (event.clientY - rect.top - size / 2) + 'px';
+    element.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
 }
 }
 
