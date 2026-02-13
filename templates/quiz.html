@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Know Me Better</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-white shadow-lg mb-8">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div class="flex items-center py-4">
+                        <span class="font-semibold text-gray-500 text-lg">My Portfolio</span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="/" class="py-4 px-2 text-gray-500 hover:text-green-500 transition duration-300">Home</a>
+                        <a href="/about" class="py-4 px-2 text-gray-500 hover:text-green-500 transition duration-300">About</a>
+                        <a href="/quiz" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold">Quiz</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 max-w-2xl">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">How well do you know me?</h1>
+            
+            <div id="quiz-container">
+                <!-- Questions will be loaded here -->
+                <div class="flex justify-center">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
+                </div>
+            </div>
+
+            <div id="result-container" class="hidden mt-6 text-center">
+                <h2 class="text-xl font-bold mb-2">Results</h2>
+                <p id="score-display" class="text-lg mb-4"></p>
+                <div id="prize-display" class="hidden p-4 bg-yellow-100 text-yellow-800 rounded-lg border border-yellow-300 animate-bounce">
+                </div>
+                <button onclick="loadQuiz()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Try Again</button>
+            </div>
+
+            <button id="submit-btn" onclick="submitQuiz()" class="hidden w-full mt-6 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Submit Answers</button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestions = [];
+
+        async function loadQuiz() {
+            try {
+                const response = await fetch('/api/quiz');
+                const data = await response.json();
+                currentQuestions = data.questions;
+                renderQuiz(data.questions);
+            } catch (error) {
+                console.error('Error loading quiz:', error);
+                document.getElementById('quiz-container').innerHTML = '<p class="text-red-500 text-center">Error loading quiz. Please try again later.</p>';
+            }
+        }
+
+        function renderQuiz(questions) {
+            const container = document.getElementById('quiz-container');
+            const submitBtn = document.getElementById('submit-btn');
+            const resultContainer = document.getElementById('result-container');
+            
+            resultContainer.classList.add('hidden');
+            submitBtn.classList.remove('hidden');
+            
+            container.innerHTML = questions.map((q, index) => `
+                <div class="mb-6 p-4 border rounded-lg hover:shadow-sm transition">
+                    <p class="font-semibold mb-3">${index + 1}. ${q.question}</p>
+                    <div class="space-y-2">
+                        ${q.options.map((opt, optIndex) => `
+                            <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                                <input type="radio" name="q${q.id}" value="${optIndex}" class="form-radio text-green-500 h-4 w-4">
+                                <span>${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function submitQuiz() {
+            const answers = {};
+            let allAnswered = true;
+
+            currentQuestions.forEach(q => {
+                const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+                if (selected) {
+                    answers[q.id] = parseInt(selected.value);
+                } else {
+                    allAnswered = false;
+                }
+            });
+
+            if (!allAnswered) {
+                alert('Please answer all questions!');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/quiz/check', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ answers })
+                });
+                
+                const result = await response.json();
+                showResults(result);
+            } catch (error) {
+                console.error('Error submitting quiz:', error);
+            }
+        }
+
+        function showResults(result) {
+            const container = document.getElementById('quiz-container');
+            const submitBtn = document.getElementById('submit-btn');
+            const resultContainer = document.getElementById('result-container');
+            const scoreDisplay = document.getElementById('score-display');
+            const prizeDisplay = document.getElementById('prize-display');
+
+            container.innerHTML = '';
+            submitBtn.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+
+            scoreDisplay.textContent = `You scored ${result.score} out of ${result.total}`;
+            
+            if (result.prize) {
+                prizeDisplay.textContent = result.prize;
+                prizeDisplay.classList.remove('hidden');
+            } else {
+                prizeDisplay.classList.add('hidden');
+            }
+        }
+
+        // Load quiz on page load
+        loadQuiz();
+    </script>
+</body>
+</html>
