@@ -1,3 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleek Blue & Black Layout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d47a1;
+      --accent: #1976d2;
+      --background: #101522;
+      --card-bg: #18203a;
+      --text: #e3eafc;
+      --shadow: 0 8px 24px rgba(13, 71, 161, 0.15);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--background) 60%, var(--primary) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background 0.5s;
+    }
+    header {
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      padding: 2rem 0;
+      text-align: center;
+      animation: fadeInDown 1s;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow);
+      animation: fadeInUp 1.2s;
+    }
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(25, 118, 210, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.4s;
+      outline: none;
+      margin-top: 1rem;
+      animation: popIn 1.5s;
+    }
+    .btn:hover, .btn:focus {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 8px 32px rgba(25, 118, 210, 0.3);
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.8);}
+      80% { opacity: 1; transform: scale(1.05);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+        border-radius: 1rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sleek Blue & Black Page</h1>
+  </header>
+  <main>
+    <h2>Welcome to Your Professional Layout</h2>
+    <p>
+      This page features a modern blue and black color scheme, smooth animations, and a clean, professional font. The layout is fully responsive and ready for your content.
+    </p>
+    <button class="btn">Get Started</button>
+  </main>
+</body>
+</html>
 <!doctype html>
 <html lang="en">
 <head>
@@ -215,8 +336,9 @@
     <div class="container">
       <h1 class="site-title">Arjun007-wiz</h1>
       <nav class="main-nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About</a>
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/quiz" class="nav-link">Quiz</a>
       </nav>
     </div>
   </header>

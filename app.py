@@ -12,10 +12,74 @@ SYSTEM_PROMPT = """You are a helpful AI assistant. Keep your responses very brie
 Answer in 2-3 lines maximum. Be direct and to the point. Avoid lengthy explanations and examples.
 Focus on the core answer the user is looking for."""
 
+# Quiz Configuration
+QUIZ_QUESTIONS = [
+    {
+        "id": 1,
+        "question": "What is the main purpose of this website?",
+        "options": ["To sell chainsaws", "To let people know about me", "To play games", "To learn Python"],
+        "correct": 1
+    },
+    {
+        "id": 2,
+        "question": "Which page tells you about my background?",
+        "options": ["Home", "Quiz", "About Me", "Contact"],
+        "correct": 2
+    },
+    {
+        "id": 3,
+        "question": "What happens if you win the quiz?",
+        "options": ["Nothing", "You get a prize", "You get banned", "You lose points"],
+        "correct": 1
+    }
+]
+
 @app.route('/')
 def home():
     """Render the main chat interface"""
     return render_template('index.html')
+
+@app.route('/about')
+def about():
+    """Render the about page"""
+    return render_template('about.html')
+
+@app.route('/quiz')
+def quiz():
+    """Render the quiz page"""
+    return render_template('quiz.html')
+
+@app.route('/api/quiz', methods=['GET'])
+def get_quiz():
+    """Get quiz questions"""
+    return jsonify({
+        'questions': [{
+            'id': q['id'],
+            'question': q['question'],
+            'options': q['options']
+        } for q in QUIZ_QUESTIONS]
+    })
+
+@app.route('/api/quiz/check', methods=['POST'])
+def check_quiz():
+    """Check quiz answers"""
+    try:
+        data = request.json
+        answers = data.get('answers', {})
+        score = 0
+        
+        for q in QUIZ_QUESTIONS:
+            qid = str(q['id'])
+            if qid in answers and answers[qid] == q['correct']:
+                score += 1
+        
+        return jsonify({
+            'score': score,
+            'total': len(QUIZ_QUESTIONS),
+            'prize': "🎉 You won a prize! 🎉" if score == len(QUIZ_QUESTIONS) else None
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
